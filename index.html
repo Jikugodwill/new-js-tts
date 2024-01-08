@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS TTS</title>
+    <script defer>
+
+
+        function speak(textInput) {
+            var msg = new SpeechSynthesisUtterance();
+            var voices = window.speechSynthesis.getVoices();
+            msg.voice = voices[10];
+            msg.voiceURI = "native";
+            msg.volume = 1;
+            msg.rate = 1;
+            msg.pitch = 1;
+            msg.text = textInput;
+            msg.lang = "en-GB";
+            speechSynthesis.speak(msg);
+            console.log("voices", voices);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const textInput = document.querySelector('input[type="text"]');
+            const form = document.querySelector('form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                speak(textInput.value);
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <form>
+        <input type="text" placeholder="Type in something you would want to listen to">
+        <button type="submit">Speak</button>
+    </form>
+</body>
+
+</html>
